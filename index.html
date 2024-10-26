@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Education Platform</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f7f7f7;
+        }
+        h1 {
+            color: #333;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .resource-list {
+            margin-top: 20px;
+        }
+        .resource-item {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Accessible Education Platform</h1>
+    <p>Select a topic to view educational resources.</p>
+
+    <!-- Topic Dropdown -->
+    <div>
+        <label for="topic-select">Choose a Topic:</label>
+        <select id="topic-select" onchange="displayResources()">
+            <option value="">-- Select a Topic --</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Science">Science</option>
+            <option value="English">English</option>
+            <option value="History">History</option>
+        </select>
+    </div>
+
+    <!-- Resources Display -->
+    <div id="resources" class="content resource-list"></div>
+
+    <script>
+        // JavaScript: Educational resources data
+        const resources = {
+            "Mathematics": [
+                { title: "Basic Algebra", link: "https://www.khanacademy.org/math/algebra" },
+                { title: "Geometry Basics", link: "https://www.khanacademy.org/math/geometry" }
+            ],
+            "Science": [
+                { title: "Physics Fundamentals", link: "https://www.khanacademy.org/science/physics" },
+                { title: "Introduction to Biology", link: "https://www.khanacademy.org/science/biology" }
+            ],
+            "English": [
+                { title: "Grammar Basics", link: "https://www.grammarly.com/blog/grammar-basics/" },
+                { title: "Writing Skills", link: "https://owl.purdue.edu/owl/purdue_owl.html" }
+            ],
+            "History": [
+                { title: "World History Overview", link: "https://www.khanacademy.org/humanities/world-history" },
+                { title: "American History", link: "https://www.history.com/topics/us-history" }
+            ]
+        };
+
+        // Function to display resources based on selected topic
+        function displayResources() {
+            const topic = document.getElementById("topic-select").value;
+            const resourcesDiv = document.getElementById("resources");
+
+            // Clear any existing content
+            resourcesDiv.innerHTML = "";
+
+            if (topic && resources[topic]) {
+                resources[topic].forEach(resource => {
+                    const resourceElement = document.createElement("div");
+                    resourceElement.className = "resource-item";
+                    resourceElement.innerHTML = `<a href="${resource.link}" target="_blank">${resource.title}</a>`;
+                    resourcesDiv.appendChild(resourceElement);
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
+
